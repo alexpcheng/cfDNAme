@@ -1,0 +1,3 @@
+chrom	length	bases	mean	min	max
+chr21	48129895	52744084	1.10	0	48
+total	48129895	52744084	1.10	0	48

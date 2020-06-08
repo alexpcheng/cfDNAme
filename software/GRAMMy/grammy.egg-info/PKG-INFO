@@ -1,0 +1,15 @@
+Metadata-Version: 1.1
+Name: grammy
+Version: 1.0.0
+Summary: GRAMMY: GENOME Relative Abundance based on Mixture Model theorY.
+Home-page: http://meta.usc.edu/softs/grammy
+Author: Li Charlie Xia
+Author-email: lxia@usc.edu
+License: BSD
+Description-Content-Type: UNKNOWN
+Description: This C++ python module provide tools for metagenomic abundance estimation
+        based on read probability partitions (alignment or composition based).
+        
+        TODO:
+Platform: Linux
+Provides: grammy

@@ -1,0 +1,7 @@
+[console_scripts]
+grammy_em = grammy.grammy_em:main
+grammy_gdt = grammy.grammy_gdt:main
+grammy_post = grammy.grammy_post:main
+grammy_pre = grammy.grammy_pre:main
+grammy_rdt = grammy.grammy_rdt:main
+

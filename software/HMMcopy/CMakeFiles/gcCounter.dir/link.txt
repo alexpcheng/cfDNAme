@@ -1,0 +1,1 @@
+/bin/c++   -O3 -DNDEBUG    CMakeFiles/gcCounter.dir/src/bin/gcCounter.cpp.o  -o bin/gcCounter -rdynamic lib/libfastahack.a lib/libsplit.a 

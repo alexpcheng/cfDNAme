@@ -1,0 +1,1 @@
+/bin/c++   -O3 -DNDEBUG    CMakeFiles/mapCounter.dir/src/bin/mapCounter.cpp.o  -o bin/mapCounter -rdynamic lib/libkent.a lib/libsplit.a -lm -lz 

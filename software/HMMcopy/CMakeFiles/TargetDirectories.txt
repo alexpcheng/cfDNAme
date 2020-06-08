@@ -1,0 +1,15 @@
+/workdir/apc88/KTxBS/Bin/HMMcopy/lib/CMakeFiles/bamtools.dir
+/workdir/apc88/KTxBS/Bin/HMMcopy/src/util/CMakeFiles/bigWigInfo.dir
+/workdir/apc88/KTxBS/Bin/HMMcopy/src/util/CMakeFiles/bigWigSummary.dir
+/workdir/apc88/KTxBS/Bin/HMMcopy/src/util/CMakeFiles/bigWigToBedGraph.dir
+/workdir/apc88/KTxBS/Bin/HMMcopy/src/util/CMakeFiles/bigWigToWig.dir
+/workdir/apc88/KTxBS/Bin/HMMcopy/src/util/CMakeFiles/fastaToRead.dir
+/workdir/apc88/KTxBS/Bin/HMMcopy/lib/CMakeFiles/fastahack.dir
+/workdir/apc88/KTxBS/Bin/HMMcopy/CMakeFiles/gcCounter.dir
+/workdir/apc88/KTxBS/Bin/HMMcopy/lib/CMakeFiles/kent.dir
+/workdir/apc88/KTxBS/Bin/HMMcopy/CMakeFiles/mapCounter.dir
+/workdir/apc88/KTxBS/Bin/HMMcopy/CMakeFiles/readCounter.dir
+/workdir/apc88/KTxBS/Bin/HMMcopy/src/util/CMakeFiles/segToGc.dir
+/workdir/apc88/KTxBS/Bin/HMMcopy/src/util/CMakeFiles/segToMap.dir
+/workdir/apc88/KTxBS/Bin/HMMcopy/lib/CMakeFiles/split.dir
+/workdir/apc88/KTxBS/Bin/HMMcopy/src/util/CMakeFiles/wigToBigWig.dir

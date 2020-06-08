@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/workdir/apc88/KTxBS/Bin/HMMcopy/lib/split/split.cpp
+split.h
+/workdir/apc88/KTxBS/Bin/HMMcopy/lib/split/split.h
+
+/workdir/apc88/KTxBS/Bin/HMMcopy/lib/split/split.h
+string
+-
+vector
+-
+sstream
+-
+string.h
+-
+

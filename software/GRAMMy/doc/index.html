@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../style/softs.css" type="text/css" />
+    <style type="text/css">
+	</style>
+</head>
+<body>
+	<div id="banner">
+		<div id="name">
+			<div id="name_title">
+				Genome Relative Abundance using <br/> Mixture Models (GRAMMy)
+			</div>
+			<div id="name_description">
+				-- a tool for shotgun metagenomics analysis
+			</div>
+			</div>
+		<img id="logo_image" src="logo.png" alt="GRAMMy.Logo"/>
+	</div>
+	<div id="main_text">
+		<div id="introduction" class="section">
+		<h2> Introduction </h2>
+    	<p> 
+    		GRAMMy is a computational framework developed for Genome Relative Abundance using Mixture Model theory (GRAMMy) based estimation.
+    		Accurate estimation of microbial community composition based on metagenomic sequencing data is fundamental for metagenomics analysis. 			Prevalent estimation methods are mainly based on directly summarizing alignment results or its variants; 
+    		often result in biased and/or unstable estimates. 
+    		We developed the Genome Relative Abundance using Mixture Model theory (GRAMMy) 
+    		approach estimate genome relative abundance based on shotgun reads. 
+    		GRAMMy has been demonstrated to give estimates that are accurate and robust across both simulated and real read benchmark datasets.
+    	</p>
+    	</div>
+    	<div id="Implementation" class="section">
+		<h2>Implementation</h2>
+			<div id="model">
+				<img id="model_image" src="http://meta.usc.edu/softs/grammy/model.png" alt="GRAMMy.Model"/>
+				<p>
+					<b>Figure 1.</b> 
+					The GRAMMy model. A schematic diagram of the finite mixture model underlies the GRAMMy framework for shotgun metagenomics.
+				</p> 
+			</div>			
+		</div>
+    <div id="availability" class="section">
+			<h2>Availability</h2>
+			<p><ul>
+        <!--
+				<li>
+					Standalone Python Package at: <a href="http://pypi.python.org/pypi/grammy">http://pypi.python.org/pypi/grammy</a>.<br/>
+					You can download the package and install it using:
+					<pre>$tar -zxvf grammy.tar.gz  && cd grammy && python setup.py install</pre>
+					or simply install it from your shell using:
+					<pre>$easy_install grammy</pre>
+          Sometimes, when easy_install fails, you will have to install the dependencies manually.<br/>
+					For dependence information please refer to the <a href="https://bitbucket.org/charade/grammy/src">README.txt</a> within the package.
+        </li>
+        -->
+        <li>
+          Download and use SunLab virtual box machine with pre-installed GRAMMy at:
+          <a href=http://meta.usc.edu/softs/vbox/SunLab.vdi.tgz>http://meta.usc.edu/softs/vbox/SunLab.vdi.tgz</a>.
+          Check the md5sum to ensure integrity of the file:
+          <a href=http://meta.usc.edu/softs/vbox/SunLab.vdi.tgz.md5.txt>http://meta.usc.edu/softs/vbox/SunLab.vdi.tgz.md5.txt</a>.
+          Look into the README.txt file viewable from 
+          <a href=https://bitbucket.org/charade/grammy>https://bitbucket.org/charade/grammy</a> for detailed information.
+        </li>
+        <li>
+          Download released source code package at: 
+          <a href=https://bitbucket.org/charade/grammy/get/release.tar.gz>https://bitbucket.org/charade/grammy/get/release.tar.gz </a>
+          and install.
+          <!--
+          <pre>$tar -zxvf charade-grammy-release.tar.gz</pre>
+          <pre>$cd charade-grammy-release</pre>
+          <pre>$python setup.py install</pre>
+          -->
+          Look into the README.txt file within the package (also viewable from
+          <a href=https://bitbucket.org/charade/grammy>https://bitbucket.org/charade/grammy</a>)
+          for detailed installation information and others.
+				<li>
+					Development source code access at: <a href="https://bitbucket.org/charade/grammy">https://bitbucket.org/charade/grammy</a>.<br/>
+					The python package is made open source for advanced users to pipeline the analysis or implement other variants.
+				</li>
+				<li>
+					An example genome and texon id dump directory can be downloaded here: <a href="grefs.tgz">grefs.tgz</a>.<br/>
+					An test example with step by step explanation can be found in 'test/test.sh' within the package.
+				</li>				
+			</ul></p>
+		</div>
+		<div id="contacts" class="section">
+			<h2>Contacts</h2>
+			<p>Questions and comments shall be addressed to <a href="mailto:lxia@usc.edu">lxia at usc dot edu</a>.</p>
+		</div>
+		<div id="references" class="section">
+			<h2>References</h2>
+			                        <ol>
+							                          <li>
+										            Li C. Xia, Jacob A. Cram, Ting Chen, Jed A. Fuhrman, Fengzhu Sun
+											              <a href=http://dx.plos.org/10.1371/journal.pone.0027992>
+													                  <b>Accurate genome relative abundance estimation based on shotgun metagenomic reads.</b>
+															            </a>
+																              <i>PLoS ONE</i> 2011, <b>6(12)</b>:p.e27992
+																	                                </li>
+																					                        </ol>
+		</div>
+      	</div>
+    </div>
+</body>
+</html>
