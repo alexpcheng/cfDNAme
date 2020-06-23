@@ -10,14 +10,22 @@ rule hs_blastn:
 	threads: blast_threads
 	resources:
 		mem_mb=20000
+	params:
+		prep_and_seq_type = get_seq_type #first is prep, second is seq
 	shell:
 		"""
-		{HSBLASTN} align -query {input.nonhumanfa} \
-                        -db {input.db} \
-                        -evalue 0.0001 \
-                        -perc_identity 95 \
-                        -num_threads {threads} \
-                        -outfmt 6 | python scripts/metagenome/get_taxid_filter_strand.py {output.blast_outfmt6} {input.gi_to_taxid} {wildcards.conversion}
+        seq_type={params.prep_and_seq_type[1]}
+
+        if [[ $seq_type == 2x* ]]; then
+			{HSBLASTN} align -query {input.nonhumanfa} \
+                        	-db {input.db} \
+                        	-evalue 0.0001 \
+                        	-perc_identity 95 \
+                        	-num_threads {threads} \
+                        	-outfmt 6 | python scripts/metagenome/get_taxid_filter_strand.py {output.blast_outfmt6} {input.gi_to_taxid} {wildcards.conversion}
+		elif [[ $seq_type == 1x* ]]; then
+			echo "This was processed as a single-end dataset so this is just a fun placeholder file" > {output.blast_outfmt6}
+		fi
 		"""
 								#-window_masker_db {input.obinary} \
 
@@ -33,10 +41,25 @@ rule filter_blastn:
 		tblatCT= 'sample_output/blast/consolidated_blast/{sample}.CT.pe',
 		tblatpe= 'sample_output/blast/consolidated_blast/{sample}.tblat.pe',
 		tblat1 = 'sample_output/grammy/{sample}/{sample}.tblat.1'
+	params:
+		prep_and_seq_type = get_seq_type #first is prep, second is seq
+	threads:
+		1
+	resources:
+		mem_mb=1
 	shell:
 		"""
-		Rscript scripts/metagenome/filter_paired_end_blast.R {input.GA_genomeR1} {input.GA_genomeR2} {output.tblatGA} {input.taxid_lengths}
-		Rscript scripts/metagenome/filter_paired_end_blast.R {input.CT_genomeR1} {input.CT_genomeR2} {output.tblatCT} {input.taxid_lengths}
+        seq_type={params.prep_and_seq_type[1]}
 
-		Rscript scripts/metagenome/consolidate_GA_CT_reads.R {output.tblatGA} {output.tblatCT} {output.tblatpe} {output.tblat1}
+        if [[ $seq_type == 2x* ]]; then
+			Rscript scripts/metagenome/filter_paired_end_blast2.R {input.GA_genomeR1} {input.GA_genomeR2} {output.tblatGA} {input.taxid_lengths}
+			Rscript scripts/metagenome/filter_paired_end_blast2.R {input.CT_genomeR1} {input.CT_genomeR2} {output.tblatCT} {input.taxid_lengths}
+
+			Rscript scripts/metagenome/consolidate_GA_CT_reads.R {output.tblatGA} {output.tblatCT} {output.tblatpe} {output.tblat1}
+		elif [[ $seq_type == 1x* ]]; then
+			echo "This was processed as a single-end dataset so this is just a fun placeholder file" > {output.tblatGA}
+			echo "This was processed as a single-end dataset so this is just a fun placeholder file" > {output.tblatCT}
+			echo "This was processed as a single-end dataset so this is just a fun placeholder file" > {output.tblatpe}
+			Rscript scripts/metagenome/consolidate_GA_CT_reads_SE.R {input.GA_genomeR1} {input.CT_genomeR1} {output.tblat1}
+		fi
 		"""

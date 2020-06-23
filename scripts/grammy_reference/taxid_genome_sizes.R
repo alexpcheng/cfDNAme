@@ -18,6 +18,6 @@ taxid_len <- merge(fai[, c('gi', 'genome_len')],
                    gi_taxid, by = 'gi')
 
 taxid_len <- taxid_len[, c('taxid', 'genome_len')]
-taxid_len <- aggregate(.~taxid, taxid_len, mean)
+taxid_len <- aggregate(.~taxid, taxid_len, max) #used to be mean
 taxid_len$genome_len <- round(taxid_len$genome_len)
 fwrite(x = taxid_len, file=output, quote = FALSE, col.names = TRUE, sep='\t')
