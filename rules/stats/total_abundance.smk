@@ -1,8 +1,8 @@
 rule total_abundance: #allow for qubit scaling too
     input:
-        mapping_stats = 'sample_output/stats/{sample}_mapping_stats.txt',
-        unmapped_r1 = 'sample_output/aligned/unmapped/{sample}_pe_unmapped_R1.fastq.gz',
-        unmapped_r2 = 'sample_output/aligned/unmapped/{sample}_pe_unmapped_R2.fastq.gz'
+        mapping_stats = ancient('sample_output/stats/{sample}_mapping_stats.txt'),
+        unmapped_r1 = ancient('sample_output/aligned/unmapped/{sample}_pe_unmapped_R1.fastq.gz'),
+        unmapped_r2 = ancient('sample_output/aligned/unmapped/{sample}_pe_unmapped_R2.fastq.gz')
     output:
         bam = 'sample_output/total_abundance/bam/{sample}_spikeins.bam',
         total_abundance = 'sample_output/total_abundance/{sample}.txt'

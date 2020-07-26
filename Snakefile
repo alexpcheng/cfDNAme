@@ -138,12 +138,12 @@ KNOWNCHROMO = config['KNOWNCHROMO']
 # Threads
 ################################################################################
 indexing_threads=15
-fastqc_threads=1
-trim_threads=4
-alignment_threads=4
-filter_bam_threads=4
-methylation_extraction_threads=4
-blast_threads=8
+fastqc_threads=40
+trim_threads=40
+alignment_threads=70
+filter_bam_threads=40
+methylation_extraction_threads=40
+blast_threads=20
 ################################################################################
 # RULES
 ################################################################################
@@ -153,11 +153,13 @@ rule all:
         expand('sample_output/stats/{sample}_mapping_stats.txt', sample=config['SAMPLES']),
         expand('sample_output/Lengths/{sams_ctls}_FragsHistogram.pdf', sams_ctls = config['SAMPLES']),
         expand('sample_output/conversion_rates/{sample}.bsconversion', sample = config['SAMPLES']),
-        #expand('sample_output/donor_fraction/{samples}.XY', samples = config['SAMPLES']),
         expand('sample_output/mbias/{sample}.pdf', sample = config['SAMPLES']),
         expand('sample_output/classic_tissues_of_origin{dir}/{sample}.tsv', dir = ['_trim', '_untrim'], sample = config['SAMPLES']),
+        expand('sample_output/GVHD_Refs/classic_tissues_of_origin{dir}/{sample}.tsv', dir = ['_trim', '_untrim'], sample = config['SAMPLES']),
+        expand('sample_output/MEGAKA_Refs/classic_tissues_of_origin{dir}/{sample}.tsv', dir = ['_trim', '_untrim'], sample = config['SAMPLES']),
         expand('sample_output/total_abundance/{sample}.txt', sample = config['SAMPLES']),
-        #expand('sample_output/grammy/{sams_ctls}/{sams_ctls}.grammy.tab', sams_ctls = config['SAMPLES'], conversion=['CT', 'GA'])
+        expand('sample_output/aligned/mito/{sample}_chrM.depth', sample = config['SAMPLES']),
+        expand('sample_output/grammy/{sams_ctls}/{sams_ctls}.grammy.tab', sams_ctls = config['SAMPLES'] + config['CONTROLS'], conversion=['CT', 'GA'])
 
 #Rules that create references (generally only need to be run once)
 #include: 'rules/references/get_and_index_hg19.smk'
@@ -183,6 +185,8 @@ include: 'rules/alignment/donor_fraction.smk'
 include: 'rules/methylation/estimate_BSconversion.smk'
 include: 'rules/methylation/methylation_extraction.smk'
 include: 'rules/methylation/tissues_of_origin.smk'
+include: 'rules/methylation/tissues_of_origin_GVHD_References.smk'
+include: 'rules/methylation/tissues_of_origin_MEGA_References.smk'
 include: 'rules/metagenome/phix_alignment.smk'
 include: 'rules/metagenome/decontaminate.smk'
 include: 'rules/metagenome/hsblastn.smk'

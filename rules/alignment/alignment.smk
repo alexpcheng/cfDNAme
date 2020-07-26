@@ -17,15 +17,7 @@ rule alignment:
 		"""
 		seq_type={params.prep_and_seq_type[1]}
 		threads=$(( {threads} / 2 ))
-
-
-		if [[ {wildcards.sample} == *MCB* ]]
-		then
-			METHREF={CTLMETH}
-		else
-			METHREF={HG19METH}
-		fi
-
+		METHREF={HG19METH}
 
 		if [[ $seq_type == 2x* ]]
 		then
@@ -76,16 +68,17 @@ rule filter_bam:
 		outdir = 'sample_output/aligned/raw_aligned/'
 	shell:
 		"""
-		if [[ {wildcards.sample} == *MCB* ]]
+		if [[ {wildcards.sample} == *MCB* ]] || [[ {wildcards.sample} == MCGILL*MC* ]]
 		then
+			echo "we in"
 			cp {input.bam} {output.bismark_dup}
-			cp {output.bismark_dup} {output.mapped_all_chr}
+			samtools sort -@ {threads} {output.bismark_dup} -o {output.mapped_all_chr}
 			samtools index {output.mapped_all_chr}
 			cp {output.mapped_all_chr} {output.mapped_autosomal}
 			samtools index {output.mapped_autosomal}
 			samtools sort -@ {threads} -n {output.mapped_autosomal} -o {output.name_sorted}
 		else
-			if [[ {wildcards.sample} == *L004* ]] || [[ {wildcards.sample} == *L003* ]]
+			if [[ {wildcards.sample} == *L004* ]] || [[ {wildcards.sample} == *L003* || {wildcards.sample} == *MCGILL* ]]
 			then
 				extra_params=""
 			else
@@ -100,4 +93,20 @@ rule filter_bam:
 
 			samtools sort -@ {threads} -n {output.mapped_autosomal} -o {output.name_sorted}
 		fi
+		"""
+
+rule mitochondria:
+	input:
+		mapped_all_chr=temp('sample_output/aligned/all_chr/{sample}_mapped_all_chr.bam'),
+		mapped_all_chr_bai = temp('sample_output/aligned/all_chr/{sample}_mapped_all_chr.bam.bai'),
+	output:
+		mito_bam = 'sample_output/aligned/mito/{sample}_chrM.bam',
+		mito_cov = 'sample_output/aligned/mito/{sample}_chrM.depth'
+	threads: 1
+	params:
+		mapQ='10'
+	shell:
+		"""
+		samtools view -b -q {params.mapQ} {input.mapped_all_chr} chrM -o {output.mito_bam}
+		samtools depth {output.mito_bam} -a > {output.mito_cov}
 		"""

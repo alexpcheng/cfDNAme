@@ -13,6 +13,7 @@ rule grammy:
 		est = 'sample_output/grammy/{sample}/{sample}.est',
 		gra = 'sample_output/grammy/{sample}/{sample}.gra',
 		avl = 'sample_output/grammy/{sample}/{sample}.avl'
+	resources: mem_mb=1
 	shell:
 		"""
 		prep_type=$(grep {wildcards.sample} {SEQUENCING_PREP_TABLE} | cut -f2)

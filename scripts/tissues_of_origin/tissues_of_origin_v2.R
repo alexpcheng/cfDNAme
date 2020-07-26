@@ -44,8 +44,8 @@ mp_function <- function(ref_and_sam, other, sum_to_one, group_tissues, sample_na
   }
   
   mod <- nnls(A, b)
+  percentages <- data.frame(mod$X)
   
-  percentages <- data.frame(mod$x)
   colnames(percentages) <-c('prediction')
   percentages$prediction <- as.numeric(as.character(percentages$prediction))
   
@@ -84,21 +84,28 @@ sum_to_one <- args[[6]]
 other <- args[[7]]
 group_by_celltype <- args[[8]]
 
+
 if (!(sum_to_one == "TRUE" | sum_to_one == "FALSE")){
   stop('Your sum_to_one parameter is wrong. TRUE or FALSE with caps.')
+}else{
+  sum_to_one <- as.logical(sum_to_one)
 }
-if (!(other == "TRUE" | sum_to_one == "FALSE")){
-  stop('Your sum_to_one parameter is wrong. TRUE or FALSE with caps.')
+if (!(other == "TRUE" | other == "FALSE")){
+  stop('Your other parameter is wrong. TRUE or FALSE with caps.')
+}else{
+  other <- as.logical(other)
 }
-if (!(group_by_celltype == "TRUE" | sum_to_one == "FALSE")){
-  stop('Your sum_to_one parameter is wrong. TRUE or FALSE with caps.')
+if (!(group_by_celltype == "TRUE" | group_by_celltype == "FALSE")){
+  stop('Your group_by_celltype parameter is wrong. TRUE or FALSE with caps.')
+}else{
+  group_by_celltype <- as.logical(group_by_celltype)
 }
 
 if ((length(args)) ==9){
   removals <- args[[9]]
   removals <- gsub('/', '|', removals)
 }else{
-  removals <- ''  
+  removals <- 'thiswillneverbeatissuename' 
 }
 
 # Read files and format column names -----------------------------------------------------------------------
@@ -109,7 +116,8 @@ sam.df$pmeth <- sam.df$pmeth/100
 refs.df <- fread(refs)
 coln<-fread(lookup, header=T)
 colnames(refs.df)<-c("chr", "start", "end", coln$tissue_name)
-refs.df <- refs.df[, !grepl(removals, colnames(refs.df))]
+
+refs.df <- data.table(data.frame(refs.df)[, !grepl(removals, colnames(refs.df))])
 
 # Initialize variables ----------------------------------------------------------------------------------------
 num.tissues<-ncol(refs.df)-3 # 3 columns are for chromosome, start and end
@@ -120,9 +128,9 @@ ref_and_sam <- ref_and_sam[complete.cases(ref_and_sam)]
 
 # Measuring tissue of orign ----------------------------------------------------------------------------------
 tissues_of_origin <- mp_function(ref_and_sam = ref_and_sam,
-                                 other=TRUE,
-                                 sum_to_one = TRUE,
-                                 group_tissues = FALSE,
+                                 other=other,
+                                 sum_to_one = sum_to_one,
+                                 group_tissues = group_by_celltype,
                                  sample_name=sample_name)
 
 
